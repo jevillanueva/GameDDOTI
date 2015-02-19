@@ -21,8 +21,13 @@ public class Main_menu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		w = Screen.width;
 		h = Screen.height;
+
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			Application.Quit();
+		}
 
 		switch(PlayerPrefs.GetInt("star1")){
 		case 1:

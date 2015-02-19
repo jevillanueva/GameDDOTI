@@ -17,7 +17,7 @@ public class Player_movement : MonoBehaviour {
 
 	//invertir el personaje cuando vaya hacia atras
 	void FixedUpdate(){
-		float  h= Input.GetAxis ("Horizontal");
+		float h = Input.acceleration.x;
 		if(h > 0 &&!MirarDerecha)
 			Flip ();
 		else if(h < 0 && MirarDerecha)
@@ -32,7 +32,9 @@ public class Player_movement : MonoBehaviour {
 	}
 
 	void Update () {
-		//Manejo del movimiento
+		if (this.transform.position.x <= -6) {
+			this.transform.position=new Vector2(-5.9f,this.transform.position.y);
+		}
 		if (sw_izq) {
 			transform.Translate(-velocidad_movimiento,0,0);
 		}
@@ -61,17 +63,51 @@ public class Player_movement : MonoBehaviour {
 			cant_salto++;
 			sw_salto=true;
 		}
-		if (Input.GetKeyUp (KeyCode.Space)) {
+		/*if (Input.GetKeyUp (KeyCode.Space)) {
 			sw_salto=false;
+		}*/
+		if (Input.acceleration.x < 0) {
+			if(Input.acceleration.x<-0.2f){
+				sw_der = false;
+				sw_izq = true;
+			}else{
+				sw_izq = false;
+				sw_der = false;
+			}
+
+		} else {
+			if(Input.acceleration.x>0.2f){
+				sw_izq = false;
+				sw_der = true;
+			}else{
+				sw_izq = false;
+				sw_der = false;
+			}
+		}
+		if (Input.touchCount > 0) {
+			if(Input.GetTouch(0).phase==TouchPhase.Began){
+				cant_salto++;
+				sw_salto=true;
+			}else{
+				sw_salto=false;
+			}
+		}
+	}
+	/*void OnGUI(){
+		if (GUI.Button (new Rect (Screen.width / 1.5f, Screen.height / 1.5f, Screen.width / 6, Screen.height / 6), "JUMP")) {
+			cant_salto++;
+			sw_salto=true;
 		}
 
-
-
-	}
+	}*/
 
 	void OnCollisionEnter2D(Collision2D coll){
 		if (coll.gameObject.tag == "Piso") {
 			cant_salto=0;
+		}
+		if (coll.gameObject.tag == "Pared") {
+			//Flip ();
+			//invertir_moviento();
 		}
 	}
 
