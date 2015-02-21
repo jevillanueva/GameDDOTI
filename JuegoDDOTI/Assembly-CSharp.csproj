@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\All levels\Back_all_level.cs" />
      <Compile Include="Assets\Scripts\All levels\Camera_mov_player.cs" />
+     <Compile Include="Assets\Scripts\All levels\Enemy_corr\Corrupt_controller.cs" />
      <Compile Include="Assets\Scripts\All levels\Moneda_script.cs" />
      <Compile Include="Assets\Scripts\All levels\Player_coin.cs" />
      <Compile Include="Assets\Scripts\All levels\Player_life.cs" />

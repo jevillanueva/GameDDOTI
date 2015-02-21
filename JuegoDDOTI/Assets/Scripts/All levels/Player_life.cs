@@ -18,10 +18,13 @@ public class Player_life : MonoBehaviour {
 		GUI.Label (new Rect (w / 4, h / 4, w / 6, h / 10), ("vidas: " + vida.ToString ()));
 	}
 	void OnCollisionEnter2D(Collision2D coll){
-		if(!(coll.gameObject.tag=="Piso"))
+		if (coll.gameObject.tag == "Enemigo") {
 			vida++;
+		}
 	}
 	void OnTriggerEnter2D(Collider2D coll){
-		vida--;
+		if (coll.gameObject.tag == "Enemigo") {
+			vida--;
+		}
 	}
 }
